@@ -3,6 +3,7 @@ package com.grupo6.model.entity;
 import jakarta.persistence.*;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
@@ -10,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 @Table(name = "profesores")
 public class Profesor {
 
+    @JsonBackReference
     @JsonManagedReference
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,6 +23,9 @@ public class Profesor {
     @SuppressWarnings("unused")
     private String email;
 
+    @ManyToMany(mappedBy = "profesores")
+private List<Materia> materias;
+
     @OneToMany(mappedBy = "profesor", cascade = CascadeType.ALL)
     private List<Estudiante> estudiantes;
 
@@ -28,6 +33,21 @@ public class Profesor {
         // TODO Auto-generated method stub
         
         throw new UnsupportedOperationException("Unimplemented method 'getEstudiantes'");
+    }
+
+    public void setNombre(String string) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'setNombre'");
+    }
+
+    public void setEmail(String string) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'setEmail'");
+    }
+
+    public void setMaterias(List<Materia> of) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'setMaterias'");
     }
 
     // Getters y Setters
