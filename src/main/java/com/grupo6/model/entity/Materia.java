@@ -1,20 +1,27 @@
 package com.grupo6.model.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+// import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "materias")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Materia {
 
-    @JsonManagedReference
+    // @JsonManagedReference
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @SuppressWarnings("unused")
+    // @SuppressWarnings("unused")
     private String nombre;
 
     @ManyToMany
@@ -33,10 +40,10 @@ public class Materia {
     )
     private List<Estudiante> estudiantes;
 
-    public void setNombre(String nombre2) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'setNombre'");
-    }
+    // public void setNombre(String nombre2) {
+    //     // TODO Auto-generated method stub
+    //     throw new UnsupportedOperationException("Unimplemented method 'setNombre'");
+    // }
 
     // Getters y Setters
 }

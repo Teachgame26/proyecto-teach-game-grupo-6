@@ -9,8 +9,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/profesores")
-
-
 public class ProfesorController {
 
     
