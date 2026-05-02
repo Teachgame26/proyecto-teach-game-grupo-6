@@ -10,8 +10,11 @@ public class Usuario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @SuppressWarnings("unused")
     private String nombre;
+    @SuppressWarnings("unused")
     private String email;
+    @SuppressWarnings("unused")
     private String password;
 
     @Enumerated(EnumType.STRING)
@@ -20,6 +23,26 @@ public class Usuario {
     public enum Rol {
         ESTUDIANTE,
         PROFESOR
+    }
+
+    public void setNombre(String nombre2) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'setNombre'");
+    }
+
+    public void setEmail(String email2) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'setEmail'");
+    }
+
+    public void setPassword(String string) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'setPassword'");
+    }
+
+    public void setRol(Rol rol2) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'setRol'");
     }
 
     // Getters y Setters
