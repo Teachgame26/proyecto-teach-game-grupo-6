@@ -1,10 +1,9 @@
 package com.grupo6.config;
 
-import com.grupo6.model.entity.Usuario;
-import com.grupo6.repository.UsuarioRepository;
+import com.grupo6.model.entity.*;
+import com.grupo6.repository.*;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.*;
 
 import java.util.List;
 
@@ -12,33 +11,36 @@ import java.util.List;
 public class DataLoader {
 
     @Bean
-    CommandLineRunner initDatabase(UsuarioRepository repository) {
+    CommandLineRunner init(ProfesorRepository profesorRepo, EstudianteRepository estudianteRepo) {
         return args -> {
 
-            List<Usuario> usuarios = List.of(
+            // Crear profesores
+            Profesor p1 = new Profesor();
+            p1.setNombre("Carlos Pérez");
+            p1.setEmail("carlos@uni.com");
 
-                // Profesores
-                crear("Carlos Pérez", "carlos@uni.com", Usuario.Rol.PROFESOR),
-                crear("Ana Gómez", "ana@uni.com", Usuario.Rol.PROFESOR),
+            Profesor p2 = new Profesor();
+            p2.setNombre("Ana Gómez");
+            p2.setEmail("ana@uni.com");
 
-                // Estudiantes
-                crear("Juan López", "juan@uni.com", Usuario.Rol.ESTUDIANTE),
-                crear("María Torres", "maria@uni.com", Usuario.Rol.ESTUDIANTE),
-                crear("Luis Ramírez", "luis@uni.com", Usuario.Rol.ESTUDIANTE),
-                crear("Sofía Herrera", "sofia@uni.com", Usuario.Rol.ESTUDIANTE),
-                crear("Pedro Castillo", "pedro@uni.com", Usuario.Rol.ESTUDIANTE)
-            );
+            profesorRepo.saveAll(List.of(p1, p2));
 
-            repository.saveAll(usuarios);
+            // Crear estudiantes
+            Estudiante e1 = crearEst("Juan", "juan@uni.com", p1);
+            Estudiante e2 = crearEst("Maria", "maria@uni.com", p1);
+            Estudiante e3 = crearEst("Luis", "luis@uni.com", p1);
+            Estudiante e4 = crearEst("Sofia", "sofia@uni.com", p2);
+            Estudiante e5 = crearEst("Pedro", "pedro@uni.com", p2);
+
+            estudianteRepo.saveAll(List.of(e1, e2, e3, e4, e5));
         };
     }
 
-    private Usuario crear(String nombre, String email, Usuario.Rol rol) {
-        Usuario u = new Usuario();
-        u.setNombre(nombre);
-        u.setEmail(email);
-        u.setPassword("1234"); // simple para pruebas
-        u.setRol(rol);
-        return u;
+    private Estudiante crearEst(String nombre, String email, Profesor profesor) {
+        Estudiante e = new Estudiante();
+        e.setNombre(nombre);
+        e.setEmail(email);
+        e.setProfesor(profesor);
+        return e;
     }
 }
